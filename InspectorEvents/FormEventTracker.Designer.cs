@@ -1,4 +1,4 @@
-﻿namespace InspectorEvents
+namespace InspectorEvents
 {
     partial class FormEventTracker
     {
@@ -144,6 +144,7 @@
             this.Controls.Add(this.listBoxLog);
             this.Name = "FormEventTracker";
             this.Text = "Outlook Events";
+            this.Load += new System.EventHandler(this.FormEventTracker_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
