@@ -1,4 +1,4 @@
-﻿/*
+/*
  * By David Barrett, Microsoft Ltd. 2016-2020. Use at your own risk.  No warranties are given.
  * 
  * DISCLAIMER:
@@ -48,11 +48,30 @@ namespace InspectorEvents
         private void checkBoxAlwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             this.TopMost = checkBoxAlwaysOnTop.Checked;
+            Properties.Settings.Default.AlwaysOnTop = checkBoxAlwaysOnTop.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
             listBoxLog.Items.Clear();
         }
+
+        private void FormEventTracker_Load(object sender, EventArgs e)
+        {
+            checkBoxAlwaysOnTop.Checked = Properties.Settings.Default.AlwaysOnTop;
+            this.TopMost = Properties.Settings.Default.AlwaysOnTop;
+        }
+
+        private void FormEventTracker_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (logFile != null)
+            {
+                logFile.Flush();
+                logFile.Dispose();
+            }
+        }
+
+
     }
 }
