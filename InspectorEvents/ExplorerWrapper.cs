@@ -169,8 +169,12 @@ namespace InspectorEvents
             RegistryKey sk = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Office\\16.0\\Outlook\\Security");
             if (sk != null)
             {
-                previewDisabled = ((int)sk.GetValue("DisableEncryptedMessagePreview") == 1);
-                sk.Close();
+                if(sk.GetValue("DisableEncryptedMessagePreview") != null)
+                {
+                    previewDisabled = ((int)sk.GetValue("DisableEncryptedMessagePreview") == 1);
+                    sk.Close();
+                }
+                
             }
             Globals.ThisAddIn.EventTrackerForm.AddLog($"DisableEncryptedMessagePreview: {previewDisabled}");
             return previewDisabled;
